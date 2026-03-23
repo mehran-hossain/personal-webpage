@@ -7,6 +7,7 @@ import './App.css'
 
 function App() {
   const [activeProjectId, setActiveProjectId] = useState(null)
+  const [iframeReady, setIframeReady] = useState(false)
 
   const projects = useMemo(
     () => [
@@ -93,6 +94,12 @@ function App() {
       document.body.style.overflow = prevBody
     }
   }, [activeProject])
+
+  useEffect(() => {
+    // Fade in the iframe only after the new project finishes loading.
+    if (!activeProjectId) return
+    setIframeReady(false)
+  }, [activeProjectId])
 
   return (
     <div className={`app-shell ${activeProject ? 'project-open' : ''}`}>
@@ -186,9 +193,10 @@ function App() {
           <article className="project-page-view" aria-label={`${activeProject.title} project`}>
             <iframe
               key={activeProjectId}
-              className="project-frame"
+              className={`project-frame ${iframeReady ? 'is-ready' : ''}`}
               src={activeProject.href}
               title={activeProject.title}
+              onLoad={() => setIframeReady(true)}
             />
           </article>
         )}
