@@ -17,6 +17,7 @@ function App() {
         image: bankboxImg,
         alt: 'BankBox project preview',
         href: '/projects/project-1.html',
+        tags: ['Angular', 'Express', 'Node.js'],
       },
       {
         id: 'project-2',
@@ -25,6 +26,7 @@ function App() {
         image: theboardImg,
         alt: 'The Board project preview',
         href: '/projects/project-2.html',
+        tags: ['React', 'Express', 'Supabase', 'Tailwind'],
       },
       {
         id: 'project-3',
@@ -33,6 +35,7 @@ function App() {
         image: meowzartImg,
         alt: 'Meowzart project preview',
         href: '/projects/project-3.html',
+        tags: ['React'],
       },
     ],
     []
@@ -44,8 +47,13 @@ function App() {
     ? projects.findIndex((p) => p.id === activeProjectId)
     : -1
 
+  const isFirstProject = activeProjectIndex === 0
+  const isLastProject = activeProjectIndex === projects.length - 1
+
   const goToAdjacentProject = (delta) => {
     if (activeProjectIndex < 0) return
+    if (delta < 0 && isFirstProject) return
+    if (delta > 0 && isLastProject) return
     const len = projects.length
     const nextIdx = (activeProjectIndex + delta + len) % len
     const next = projects[nextIdx]
@@ -111,6 +119,7 @@ function App() {
               <button
                 type="button"
                 className="project-cycle-link"
+                disabled={isFirstProject}
                 onClick={() => goToAdjacentProject(-1)}
               >
                 &lt; Prev
@@ -118,6 +127,7 @@ function App() {
               <button
                 type="button"
                 className="project-cycle-link"
+                disabled={isLastProject}
                 onClick={() => goToAdjacentProject(1)}
               >
                 Next &gt;
@@ -158,6 +168,15 @@ function App() {
                 <img src={project.image} className="card-image" alt={project.alt} />
                 <div className="card-body">
                   <h3>{project.title}</h3>
+                  {Array.isArray(project.tags) && project.tags.length ? (
+                    <div className="project-tags" aria-label="Technologies used">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="project-tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
                   <p>{project.subtitle}</p>
                 </div>
               </button>
