@@ -40,6 +40,38 @@ function App() {
 
   const activeProject = projects.find((project) => project.id === activeProjectId)
 
+  const activeProjectIndex = activeProject
+    ? projects.findIndex((p) => p.id === activeProjectId)
+    : -1
+
+  const goToAdjacentProject = (delta) => {
+    if (activeProjectIndex < 0) return
+    const len = projects.length
+    const nextIdx = (activeProjectIndex + delta + len) % len
+    const next = projects[nextIdx]
+    window.history.replaceState(
+      { siteProjectView: true, projectId: next.id },
+      ''
+    )
+    setActiveProjectId(next.id)
+  }
+
+  useEffect(() => {
+    const onPopState = (e) => {
+      const st = e.state
+      if (st && st.siteProjectView && typeof st.projectId === 'string') {
+        const valid = projects.some((p) => p.id === st.projectId)
+        if (valid) {
+          setActiveProjectId(st.projectId)
+          return
+        }
+      }
+      setActiveProjectId(null)
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [projects])
+
   useEffect(() => {
     if (!activeProject) return
     const prevHtml = document.documentElement.style.overflow
@@ -55,24 +87,44 @@ function App() {
   return (
     <div className={`app-shell ${activeProject ? 'project-open' : ''}`}>
       <div className={`top-section ${activeProject ? 'top-section-minimized' : ''}`}>
-        <header className="top">
-          <div className="identity">
-            <h2 className="name">Mehran Hossain</h2>
-            <span className="role">HCI Researcher | CS Educator</span>
-          </div>
-          <button
-            type="button"
-            className={`all-projects-button ${activeProject ? 'is-visible' : ''}`}
-            onClick={() => setActiveProjectId(null)}
-            aria-hidden={!activeProject}
-            tabIndex={activeProject ? 0 : -1}
-          >
-            Back to projects
-          </button>
-          <nav className="contact">
-            <a href="mailto:hello@example.com" className="link">mehranhossain19@gmail.com</a>
-          </nav>
-        </header>
+        <div className="site-top-chrome">
+          <header className="top">
+            <div className="identity">
+              <h2 className="name">Mehran Hossain</h2>
+              <span className="role">HCI Researcher | CS Educator</span>
+            </div>
+            <button
+              type="button"
+              className={`all-projects-button ${activeProject ? 'is-visible' : ''}`}
+              onClick={() => window.history.back()}
+              aria-hidden={!activeProject}
+              tabIndex={activeProject ? 0 : -1}
+            >
+              Back to projects
+            </button>
+            <nav className="contact">
+              <a href="mailto:hello@example.com" className="link">mehranhossain19@gmail.com</a>
+            </nav>
+          </header>
+          {activeProject ? (
+            <nav className="project-cycle-nav" aria-label="Adjacent projects">
+              <button
+                type="button"
+                className="project-cycle-link"
+                onClick={() => goToAdjacentProject(-1)}
+              >
+                &lt; Prev
+              </button>
+              <button
+                type="button"
+                className="project-cycle-link"
+                onClick={() => goToAdjacentProject(1)}
+              >
+                Next &gt;
+              </button>
+            </nav>
+          ) : null}
+        </div>
 
         <main className={`landing ${activeProject ? 'landing-minimized' : ''}`}>
           <div className="avatar-wrap">
@@ -95,7 +147,13 @@ function App() {
                 key={project.id}
                 type="button"
                 className="card card-with-image project-card-trigger"
-                onClick={() => setActiveProjectId(project.id)}
+                onClick={() => {
+                  window.history.pushState(
+                    { siteProjectView: true, projectId: project.id },
+                    ''
+                  )
+                  setActiveProjectId(project.id)
+                }}
               >
                 <img src={project.image} className="card-image" alt={project.alt} />
                 <div className="card-body">
@@ -108,6 +166,7 @@ function App() {
         ) : (
           <article className="project-page-view" aria-label={`${activeProject.title} project`}>
             <iframe
+              key={activeProjectId}
               className="project-frame"
               src={activeProject.href}
               title={activeProject.title}

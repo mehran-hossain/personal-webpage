@@ -6,3 +6,65 @@ body {
   width: 100%;
 }
 
+/* Sentinel for “back to top” visibility (see common.js) */
+.project-back-to-top-sentinel {
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.project-back-to-top {
+  position: fixed;
+  bottom: 1.35rem;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  z-index: 50;
+  margin: 0;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text, #524c5c);
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.project-back-to-top:hover {
+  color: var(--text-h, #08060d);
+  border-bottom-color: currentColor;
+}
+
+.project-back-to-top:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.project-back-to-top[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-back-to-top {
+    transition: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-back-to-top {
+    color: var(--text, #b0aab8);
+  }
+  .project-back-to-top:hover {
+    color: var(--text-h, #f0eef3);
+  }
+}
+
