@@ -14,7 +14,7 @@
     function updateBackToTopVisibility() {
       const scrollBottom = window.scrollY + window.innerHeight
       const pageBottom = document.documentElement.scrollHeight
-      const nearBottom = pageBottom - scrollBottom <= 80
+      const nearBottom = pageBottom - scrollBottom <= 4
       btn.hidden = !nearBottom
     }
 

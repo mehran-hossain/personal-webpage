@@ -52,8 +52,10 @@ function App() {
 
   const goToAdjacentProject = (delta) => {
     if (activeProjectIndex < 0) return
-    if (delta < 0 && isFirstProject) return
-    if (delta > 0 && isLastProject) return
+    if ((delta < 0 && isFirstProject) || (delta > 0 && isLastProject)) {
+      window.history.back()
+      return
+    }
     const len = projects.length
     const nextIdx = (activeProjectIndex + delta + len) % len
     const next = projects[nextIdx]
@@ -119,7 +121,6 @@ function App() {
               <button
                 type="button"
                 className="project-cycle-link"
-                disabled={isFirstProject}
                 onClick={() => goToAdjacentProject(-1)}
               >
                 &lt; Prev
@@ -127,7 +128,6 @@ function App() {
               <button
                 type="button"
                 className="project-cycle-link"
-                disabled={isLastProject}
                 onClick={() => goToAdjacentProject(1)}
               >
                 Next &gt;
@@ -143,7 +143,7 @@ function App() {
           <div className="intro">
             <h1>Hi, I'm Mehran </h1>
             <p>
-             I'm a graduate student at the University of Manitoba doing research in Human-Computer Interaction! I also worked as a CS instructor at Brac University before starting my masters. I find myself most inspired by creativity and design geared towards practical ways of helping people. I will be sharing my progress on that endeavor on this page (currently under construction 🔨).
+             I'm a graduate student at the University of Manitoba doing research in Human-Computer Interaction! I also worked as a CS instructor at Brac University for two years before starting my masters. I find myself most inspired by creativity and design geared towards practical ways of helping people. I will be sharing my progress on that endeavor on this page (currently under construction 🔨).
             </p>
           </div>
         </main>

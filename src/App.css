@@ -82,16 +82,6 @@ html {
   border-bottom-color: currentColor;
 }
 
-.project-cycle-link:disabled {
-  cursor: not-allowed;
-  opacity: 0.35;
-  border-bottom-color: transparent;
-}
-
-.project-cycle-link:disabled:hover {
-  border-bottom-color: transparent;
-}
-
 .project-cycle-link:focus-visible {
   outline: 2px solid #c73717;
   outline-offset: 3px;
