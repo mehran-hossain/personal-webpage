@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meowzart — Virtual 2D pet</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/projects/common.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --text: #524c5c;
+        --text-h: #08060d;
+        --bg: #fff;
+        --border: #e5e4e7;
+        --muted: #f3f2f4;
+      }
+      body {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--text);
+        background: var(--bg);
+      }
+      .wrap {
+        width: 88%;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+      a {
+        color: #c73717;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #62a0ea;
+        }
+      }
+      a:hover {
+        border-bottom-color: currentColor;
+      }
+      h1 {
+        color: var(--text-h);
+        font-weight: 600;
+        font-size: 1.65rem;
+        line-height: 1.25;
+        margin: 0 0 20px;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        color: var(--text-h);
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin: 28px 0 10px;
+        letter-spacing: -0.01em;
+      }
+      h2:first-of-type {
+        margin-top: 0;
+      }
+      #overview-heading {
+        padding-top: 10px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      ul,
+      ol {
+        margin: 0 0 12px;
+        padding-left: 1.35em;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+      .project-figure {
+        margin: 0;
+      }
+      .project-img-frame {
+        background: transparent;
+        border: 1px solid #d9d7de;
+        border-radius: 4px;
+        overflow: hidden;
+        line-height: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        .project-img-frame {
+          border-color: #3d3a45;
+        }
+      }
+      .project-img-frame img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .project-img-frame video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      figcaption {
+        font-size: 13px;
+        color: var(--text);
+        margin-top: 8px;
+        line-height: 1.45;
+      }
+      .optional {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 900px) {
+        .wrap {
+          width: auto;
+          padding: 32px 24px 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <main>
+        <h1>Meowzart: Virtual 2D Pet</h1>
+
+        <figure class="project-figure">
+          <div class="project-img-frame">
+            <img
+              src="/projects/images/Meowzart-1.png"
+              alt="Meowzart web app interface showing the virtual pet on day 1."
+              loading="lazy"
+              decoding="async"
+              onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/projects/images/meowzart-1.png';}"
+            />
+          </div>
+          <figcaption>Meowzart Webapp interface, day 1.</figcaption>
+        </figure>
+
+        <section aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Overview</h2>
+          <p>
+            Meowzart is a 2D virtual pet application currently in progress, developed as part of my Aging and Technology course.
+          </p>
+          <p>
+            I’ll be demoing this at a community center for older adults, where I’m exploring how short, interactive experiences can feel meaningful and emotionally engaging.
+          </p>
+        </section>
+
+        <section aria-labelledby="motivation-heading">
+          <h2 id="motivation-heading">Motivation</h2>
+          <p>
+            I’ve always loved animals, and I was interested in exploring whether aspects of caregiving and emotional connection from real pet interactions can translate into a simple digital experience.
+          </p>
+          <p>
+            There are existing examples like
+            <a href="https://en.wikipedia.org/wiki/Nintendogs" target="_blank" rel="noopener noreferrer">Nintendogs</a>
+            or companion robots like
+            <a href="https://joyforall.com/" target="_blank" rel="noopener noreferrer">Joy for All</a>,
+            but many focus on realism or novelty. With Meowzart, I wanted to take a simpler approach and focus on caregiving, responsiveness, and trust-building.
+          </p>
+        </section>
+
+        <section aria-labelledby="approach-heading">
+          <h2 id="approach-heading">Approach</h2>
+          <p>
+            One challenge with this idea is that bonds with pets usually develop over time, while the study setting only allows for short interactions (around 10 minutes).
+          </p>
+          <p>To address this, I designed the experience so users can:</p>
+          <ul>
+            <li>cycle through different “days”, showing progression over time</li>
+            <li>interact through both actions and conversation</li>
+          </ul>
+          <p>
+            The chat feature will be implemented using a Wizard-of-Oz approach, allowing me to simulate responsive and emotionally aware interactions during the study without building a full backend system.
+          </p>
+          <p>
+            In the demo, this appears as gradually building trust with the pet, a simplified way to simulate longer-term interaction within a short session.
+          </p>
+        </section>
+
+        <section aria-labelledby="features-heading">
+          <h2 id="features-heading">Features</h2>
+          <ul>
+            <li>Care-based interactions (e.g., feeding, petting)</li>
+            <li>Animated responses that reflect the pet’s state</li>
+            <li>A simple trust progression system over time</li>
+            <li>A chat interface to simulate conversational interaction (Wizard-of-Oz during testing)</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="demo-heading">
+          <h2 id="demo-heading">Demo</h2>
+          <figure class="project-figure">
+            <div class="project-img-frame">
+              <video controls preload="metadata" playsinline>
+                <source src="/projects/images/meowzart-demo.mp4" type="video/mp4" />
+                <source src="/projects/images/meowart-demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <figcaption>Meowzart demo video.</figcaption>
+          </figure>
+        </section>
+
+        <section class="optional" aria-labelledby="credits-heading">
+          <h2 id="credits-heading">Credits</h2>
+          <p>
+            Cat sprites and related pixel art from
+            <a href="https://toffeecraft.itch.io/cat-pack" target="_blank" rel="noopener noreferrer">Cat Pack — Mochi</a>
+            by ToffeeCraft on itch.io.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

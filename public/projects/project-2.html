@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Two</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/projects/common.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --text: #524c5c;
+        --text-h: #08060d;
+        --bg: #fff;
+        --border: #e5e4e7;
+        --muted: #f3f2f4;
+      }
+      body {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--text);
+        background: var(--bg);
+      }
+      .wrap {
+        width: 88%;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+      a {
+        color: #c73717;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #62a0ea;
+        }
+      }
+      a:hover {
+        border-bottom-color: currentColor;
+      }
+      h1 {
+        color: var(--text-h);
+        font-weight: 600;
+        font-size: 1.65rem;
+        line-height: 1.25;
+        margin: 0 0 20px;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        color: var(--text-h);
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin: 28px 0 10px;
+        letter-spacing: -0.01em;
+      }
+      h3 {
+        color: var(--text-h);
+        font-size: 16px;
+        font-weight: 600;
+        margin: 14px 0 6px;
+      }
+      h2:first-of-type {
+        margin-top: 0;
+      }
+      #overview-heading {
+        padding-top: 10px;
+      }
+      #takeaways-heading {
+        padding-top: 10px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      ul,
+      ol {
+        margin: 0 0 12px;
+        padding-left: 1.35em;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+      .project-figure {
+        margin: 0;
+      }
+      .project-img-frame {
+        background: transparent;
+        border: 1px solid #d9d7de;
+        border-radius: 4px;
+        overflow: hidden;
+        line-height: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        .project-img-frame {
+          border-color: #3d3a45;
+        }
+      }
+      .project-img-frame img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .project-img-frame video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      figcaption {
+        font-size: 13px;
+        color: var(--text);
+        margin-top: 8px;
+        line-height: 1.45;
+      }
+      .optional {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 900px) {
+        .wrap {
+          width: auto;
+          padding: 32px 24px 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <main>
+        <h1>The Board: Virtual Campus Event Board</h1>
+
+        <figure class="project-figure">
+          <div class="project-img-frame">
+            <img
+              src="images/theboard-1.png"
+              alt="Homepage showing the virtual board where users can scroll to zoom or click posters to view event details."
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>
+            Homepage showing the virtual board, where users can scroll to zoom or click posters to view event details.
+          </figcaption>
+        </figure>
+
+        <section aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Overview</h2>
+          <p>
+            The Board is a virtual campus event board that serves as a central, interactive platform for campus events.
+          </p>
+          <p>
+            My team and I built The Board in 24 hours during devHacks 2026. This was something I wanted to do for a while as I personally struggled with keeping up with campus events. I try to use social media as little as possible, but most events are shared through Instagram stories (which aren't easy to keep track of and you have to follow like 15 different pages). 
+            While there is a UofM events page, it doesn't post all student events, people hardly use it, and it isn't cool and interactive like The Board. 
+          </p>
+          <p>Relevant Source: <a href="https://www.reddit.com/r/umanitoba/comments/1okf3xs/what_platforms_do_you_find_out_about_on_campus/"> This reddit post (yes I'm citing reddit, don't tell my profs)</a></p>
+          <p>
+            Try The Board yourself:
+            <s><a href="https://jointheboard.space/" target="_blank" rel="noopener noreferrer">https://jointheboard.space/</a></s>
+            (down for now)
+          </p>
+        </section>
+
+        <section aria-labelledby="features-heading">
+          <h2 id="features-heading">Features</h2>
+          <ul>
+            <li><strong>Interactive Campus Board:</strong> The interface is designed to feel like a real-life campus bulletin board. Users can browse events and interact with them, making discovery more fun/engaging.</li>
+            <li><strong>Social Signal (Who is Going):</strong> Users can indicate whether they are attending an event, and others can see this. This gives users an idea of the event size and can help them decide whether to attend.</li>
+            <li><strong>Filtering and Discovery:</strong> Events can be filtered using tags, making it easier to find relevant activities based on interests.</li>
+            <li><strong>Posting Events:</strong> Students can create and share their own events, allowing the platform to capture both official and student-run activities.</li>
+            <li><strong>Booklet Mode:</strong> Users can switch to a booklet view to browse events in a more structured, list-like format.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="contribution-heading">
+          <h2 id="contribution-heading">Contribution</h2>
+          <p>
+            This project was inspired by my own experience of missing campus events and wanting a better way to keep track of them. During development, I focused mainly on designing the board and making it interactive.
+          </p>
+          <p>
+            One memorable challenge was how posters should be placed on the board. Instead of random placement, I used a probability-based approach that prioritizes filling the center area first, so the board feels more natural and visually balanced.
+          </p>
+          <p>
+            Ideally, users would be able to reposition posters themselves, but given the time constraints of the hackathon, this was a solution that worked well.
+          </p>
+        </section>
+
+        <section aria-labelledby="demo-heading">
+          <h2 id="demo-heading">Demo</h2>
+          <figure class="project-figure">
+            <div class="project-img-frame">
+              <video id="theboard-demo-video" controls preload="metadata" muted playsinline>
+                <source src="images/theboard-demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <figcaption>
+              The Board demo video showing board navigation and booklet mode.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="takeaways-heading">
+          <h2 id="takeaways-heading">Takeaways</h2>
+          <p>
+            Building this in a 24-hour hackathon was a great experience. This was probably the most fun I had coding something as I got to build it with my friends from the HCI lab (thanks Simran, Emmanuel, Lara, and Melika!).
+          </p>
+          <p>
+            It pushed me to:
+          </p>
+          <ul>
+            <li>Actually turn an idea into a working prototype</li>
+            <li>Embrace chaos as I tried to learn React and Tailwind on the fly</li>
+            <li>Collaborate closely with my (super supportive) team under time constraints</li>
+          </ul>
+         
+        </section>
+
+        <section class="optional" aria-labelledby="next-heading">
+          <h2 id="next-heading">Future Direction</h2>
+          <p>
+            This is a project I believe could have real-world use.
+          </p>
+          <p>
+            We are currently exploring this idea further and have started conversations with our univerisity's student union about whether something like this could be implemented more broadly.
+          </p>
+          <p>Since UofM is largely a commuter campus, it can be difficult for students to socialize There’s potential to expand The Board into a platform that actively supports this. Potential features could include:</p>
+          <ul>
+            <li>adding an event ideas space for informal meetups (e.g., group study sessions)</li>
+            <li>introducing features that lower the barrier to interacting with other students</li>
+            <li>improving visibility for smaller, community-driven events</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
+

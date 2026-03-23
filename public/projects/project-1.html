@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BankBox — Online banking sandbox</title>
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="/projects/common.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --text: #524c5c;
+        --text-h: #08060d;
+        --bg: #fff;
+        --border: #e5e4e7;
+        --muted: #f3f2f4;
+      }
+      body {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--text);
+        background: var(--bg);
+      }
+      .wrap {
+        width: 88%;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 32px 0 56px;
+      }
+      a {
+        color: #c73717;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #62a0ea;
+        }
+      }
+      a:hover {
+        border-bottom-color: currentColor;
+      }
+      h1 {
+        color: var(--text-h);
+        font-weight: 600;
+        font-size: 1.65rem;
+        line-height: 1.25;
+        margin: 0 0 20px;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        color: var(--text-h);
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin: 28px 0 10px;
+        letter-spacing: -0.01em;
+      }
+      h2:first-of-type {
+        margin-top: 0;
+      }
+      #takeaways-heading {
+        padding-top: 10px;
+      }
+      #overview-heading {
+        padding-top: 10px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      ul,
+      ol {
+        margin: 0 0 12px;
+        padding-left: 1.35em;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+      .lede {
+        font-size: 1.05rem;
+        color: var(--text-h);
+        margin-bottom: 14px;
+      }
+      .cta {
+        margin: 14px 0 0;
+      }
+      .goal-block {
+        margin-bottom: 16px;
+      }
+      .goal-block:last-child {
+        margin-bottom: 0;
+      }
+      .goal-block h3 {
+        color: var(--text-h);
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 6px;
+      }
+      .figure-row {
+        display: grid;
+        gap: 12px;
+        margin: 16px 0 4px;
+      }
+      @media (min-width: 520px) {
+        .figure-row.cols-2 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      figure {
+        margin: 0;
+      }
+      .img-slot {
+        aspect-ratio: 4 / 3;
+        background: var(--muted);
+        border: 1px dashed var(--border);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text);
+        font-size: 13px;
+        text-align: center;
+        padding: 12px;
+        box-sizing: border-box;
+      }
+      .figure-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0 4px;
+      }
+      .figure-gallery__pair {
+        display: grid;
+        row-gap: 14px;
+        column-gap: 3px;
+        align-items: start;
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      @media (min-width: 520px) {
+        .figure-gallery__pair {
+          /* min track sizes avoid fr tracks collapsing to ~0 when zoomed in */
+          grid-template-columns: minmax(132px, 1.45fr) minmax(96px, 0.85fr);
+          column-gap: 3px;
+          row-gap: 14px;
+        }
+      }
+      .project-figure {
+        margin: 0;
+      }
+      .project-img-frame {
+        background: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        line-height: 0;
+        box-shadow: 0 1px 3px rgba(8, 6, 13, 0.06);
+      }
+      /* Case-study shots: no fill, light border around image */
+      .figure-gallery .project-img-frame {
+        background: transparent;
+        border: 1px solid #d9d7de;
+        border-radius: 4px;
+        box-shadow: none;
+        overflow: hidden;
+      }
+      @media (prefers-color-scheme: dark) {
+        .figure-gallery .project-img-frame {
+          border-color: #3d3a45;
+        }
+      }
+      .project-img-frame img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      /* Pair row: same frame height; px only (no vh) so zoom doesn’t shrink the box via viewport units */
+      .figure-gallery__pair .project-figure--bounded .project-img-frame {
+        width: 100%;
+        height: 252px;
+        padding: 0;
+        box-sizing: border-box;
+        line-height: 0;
+      }
+      .figure-gallery__pair .project-figure--bounded .project-img-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        display: block;
+      }
+      figcaption {
+        font-size: 13px;
+        color: var(--text);
+        margin-top: 8px;
+        line-height: 1.45;
+      }
+      .optional {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 900px) {
+        .wrap {
+          width: auto;
+          padding: 32px 24px 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <main>
+        <h1>BankBox: Online Banking Practice for Older Adults</h1>
+        <figure class="project-figure">
+          <div class="project-img-frame">
+            <img
+              src="images/bankbox-page-hint.png"
+              alt="Simulated CIBC interface within BankBox showing an active page hint within a guided learning module."
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>
+            Simulated CIBC interface within BankBox showing an active page hint within a guided learning module.
+          </figcaption>
+        </figure>
+
+        <section aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Overview</h2>
+          <p >
+            BankBox is an online banking sandbox designed to help people practice everyday banking tasks safely.
+          </p>
+          <p>
+            I developed BankBox as part of my master’s research, where I explored how tools like this can help older adults (65+) build online banking skills and confidence. The features in BankBox are inspired by Social Cognitive Theory, which outlines different ways to build self-efficacy through learning and experience.
+          </p>
+          <p>
+            Try BankBox yourself:
+            <a href="https://bankbox.cs.umanitoba.ca/" target="_blank" rel="noopener noreferrer">https://bankbox.cs.umanitoba.ca/</a>
+          </p>
+        
+        </section>
+
+        <section aria-labelledby="design-goals-heading">
+          <h2 id="design-goals-heading">Design goals</h2>
+
+          <div class="goal-block">
+            <h3>1. Make it feel like real banking interfaces</h3>
+            <p>
+              Practicing on an interface that matches your actual bank makes skill transferability easier, especially for users with less technology experience.
+            </p>
+            <p>
+              To support this, I recreated interfaces similar to CIBC and Scotiabank (two of Canada’s major banks), with plans to expand to more.
+            </p>
+          </div>
+
+          <div class="goal-block">
+            <h3>2. Support different learning styles</h3>
+            <p>
+              Some people like to explore and figure things out on their own, while others prefer more structured guidance.
+            </p>
+            <p>To support both:</p>
+            <ul>
+              <li><strong>Open exploration</strong> lets users freely interact with the system</li>
+              <li><strong>Guided learning</strong> provides a list of tasks with page hints, video hints, and task completion feedback</li>
+            </ul>
+            <p>
+              Both approaches focus on hands-on learning, so users are actually doing tasks which is great for skill retention and building confidence.
+            </p>
+          </div>
+
+          <div class="goal-block">
+            <h3>3. Keep it engaging without being overwhelming</h3>
+            <p>Learning something new can feel intimidating, so I wanted to make the experience approachable.</p>
+            <p>To do this:</p>
+            <ul>
+              <li>Tasks are grouped into small modules (5–6 tasks each)</li>
+              <li>Each module has a persona with a name and picture (e.g., "Sam the Librarian"). The persona frames the module as you helping someone else (clearly a not a real person), which can be more engaging and lessen pressure.  </li>
+              <li>Tasks in modules are related to the persona which adds real-world context (e.g., "Sam switched to a new internet provider”)</li>
+              <li>Two short test modules allow users to test their understanding of tasks they practiced without using hints or feedback </li>
+            </ul>
+          </div>
+        </section>
+
+        <section aria-labelledby="study-heading">
+          <h2 id="study-heading">Study</h2>
+          <p>
+            I conducted a study with 12 older adult participants, where they used BankBox and shared their experiences.
+          </p>
+          <p>The study involved:</p>
+          <ul>
+            <li>semi-structured interviews</li>
+            <li>surveys</li>
+            <li>observational notes</li>
+          </ul>
+          <p>
+            The analysis focuses on understanding how people interacted with the system, what challenges they faced, and how it affected their confidence.
+          </p>
+          <p>We are also planning a follow-up workshop where older adults will use BankBox in a group setting.</p>
+        </section>
+
+        <section aria-labelledby="iteration-heading">
+          <h2 id="iteration-heading">Design iteration</h2>
+          <p>
+            One of the most interesting parts of this project was seeing how people actually used the system—and how that differed from what I expected.
+          </p>
+          <p>Some examples of changes I made based on user feedback:</p>
+          <ul>
+            <li><strong>Hints weren’t being used much</strong> → I made them more visually prominent with stronger color and contrast, moved video hints to a more noticeable position.</li>
+            <li><strong>Task pane sometimes blocked important UI</strong> → While there was a way to hide tasks, users had to pick between reading instructions and navigating the interface. I added a compact view which served as a middle ground so users could see tasks while navigating.</li>
+            <li><strong>Some users didn’t notice the task pane at all or had difficulty using it</strong> → I introduced an onboarding modal that highlights it and shows how it works</li>
+          </ul>
+          <p>The goal was to make the system intuitive enough that first-time users could get started independently.</p>
+
+          <div class="figure-gallery" aria-label="Task pane and onboarding iterations">
+            <div class="figure-gallery__pair">
+              <figure class="project-figure project-figure--bounded">
+                <div class="project-img-frame">
+                  <img
+                    src="images/bankbox-pre-taskpane.png"
+                    alt="BankBox interface showing the initial task pane layout beside the banking UI."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption>Initial design, taskpane is not explicitly pointed out and there are no instructions for the different buttons.</figcaption>
+              </figure>
+              <figure class="project-figure project-figure--bounded">
+                <div class="project-img-frame">
+                  <img
+                    src="images/bankbox-compact-view.png"
+                    alt="BankBox compact task view using less screen space while navigating."
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption>Compact view takes up less screen space.</figcaption>
+              </figure>
+            </div>
+            <figure class="project-figure">
+              <div class="project-img-frame">
+                <img
+                  src="images/bankbox-post-taskpane.png"
+                  alt="Updated task pane with prominent hint buttons and first-time onboarding modal with orange callouts and arrows."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                Updated taskpane with prominent hint buttons. Onboarding modal (orange text and arrows) shown when user enters a guided module for the first time.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+      
+        <section aria-labelledby="takeaways-heading">
+          <h2 id="takeaways-heading">Takeaways</h2>
+        
+          <p>
+            This research has been a  really valuable learning experience. I worked on
+            BankBox end-to-end: from early Figma prototypes, to building
+            the system, to planning and conducting the study, and iterating on the design
+            based on user feedback.
+          </p>
+        
+          <p>
+            Working with participants helped surface usability issues I wouldn’t have
+            anticipated on my own. It was especially interesting to see how differently
+            people approached the same tasks, and how much I could learn through observations and interviews.
+          </p>
+        
+          <p>
+            Hearing participants reflect on their experience with BankBox was really encouraging and reinforced my
+            belief that tools like this can have a meaningful impact in helping people
+            learn technology.
+          </p>
+        
+          <p>
+            This work would not have been possible without my supervisor, Dr. Celine
+            Latulipe, who has been a constant source of guidance, support, and
+            encouragement throughout this journey.
+          </p>
+
+          <p> I am currently in the data analysis phase. <br>
+            Study details: <a href="https://celinelatulipe.net/the-bankbox-study-practicing-online-banking-in-a-simulated-environment/">https://celinelatulipe.net/the-bankbox-study-practicing-online-banking-in-a-simulated-environment/</a></p>
+        </section>
+
+        <section class="optional" aria-labelledby="next-heading">
+          <h2 id="next-heading">Future Direction</h2>
+          <p>Moving forward, I would be interested in:</p>
+          <ul>
+            <li>exploring collaborative learning (e.g., learning with family members)</li>
+            <li>evaluating longer-term skill retention</li>
+            <li>expanding support to more banking interfaces</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
