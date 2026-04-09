@@ -414,6 +414,15 @@ html {
     gap: 20px;
     text-align: center;
   }
+  .avatar-wrap {
+    justify-content: center;
+  }
+  .avatar-hat-arrow-left {
+    left: 6px;
+  }
+  .avatar-hat-arrow-right {
+    right: 6px;
+  }
   .intro {
     text-align: center;
   }
