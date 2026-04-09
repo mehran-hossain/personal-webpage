@@ -8,6 +8,41 @@ import './App.css'
 function App() {
   const [activeProjectId, setActiveProjectId] = useState(null)
   const [iframeReady, setIframeReady] = useState(false)
+  // 0 = no hat, 1..totalHats = specific hat frame across sheets
+  const [hatSelection, setHatSelection] = useState(0)
+
+  const HAT_SHEETS = useMemo(
+    () => [
+      { url: '/projects/images/hat1.png', frames: 4, sheetWidth: 402, sheetHeight: 72 },
+      { url: '/projects/images/hat2.png', frames: 4, sheetWidth: 402, sheetHeight: 72 },
+    ],
+    []
+  )
+
+  const totalHats = HAT_SHEETS.reduce((acc, s) => acc + s.frames, 0)
+  const totalSelections = totalHats + 1 // +1 for "no hat"
+  const safeSelection = ((hatSelection % totalSelections) + totalSelections) % totalSelections
+
+  const hatStyle = useMemo(() => {
+    if (safeSelection === 0) return null
+
+    const oneBasedHatIndex = safeSelection - 1 // 0..totalHats-1
+    const activeSheet = oneBasedHatIndex < HAT_SHEETS[0].frames ? HAT_SHEETS[0] : HAT_SHEETS[1]
+    const sheetOffset = activeSheet === HAT_SHEETS[0] ? 0 : HAT_SHEETS[0].frames
+    const activeFrame = oneBasedHatIndex - sheetOffset
+    const frameWidth = activeSheet.sheetWidth / activeSheet.frames
+    const frameHeight = activeSheet.sheetHeight
+    const hatScale = 0.85
+
+    return {
+      width: `${frameWidth * hatScale}px`,
+      height: `${frameHeight * hatScale}px`,
+      backgroundImage: `url(${activeSheet.url})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: `${activeSheet.sheetWidth * hatScale}px ${activeSheet.sheetHeight * hatScale}px`,
+      backgroundPosition: `-${activeFrame * frameWidth * hatScale}px 0px`,
+    }
+  }, [HAT_SHEETS, safeSelection])
 
   const projects = useMemo(
     () => [
@@ -145,7 +180,26 @@ function App() {
 
         <main className={`landing ${activeProject ? 'landing-minimized' : ''}`}>
           <div className="avatar-wrap">
-            <img src={heroImg} className="avatar" width="220" height="220" alt="Portrait" />
+            <button
+              type="button"
+              className="avatar-hat-arrow avatar-hat-arrow-left"
+              onClick={() => setHatSelection((idx) => idx - 1)}
+              aria-label="Previous hat"
+            >
+              ‹
+            </button>
+            <img src={heroImg} className="avatar" width="200" height="200" alt="Portrait" />
+            {hatStyle ? (
+              <div className="avatar-hat" aria-hidden="true" style={hatStyle} />
+            ) : null}
+            <button
+              type="button"
+              className="avatar-hat-arrow avatar-hat-arrow-right"
+              onClick={() => setHatSelection((idx) => idx + 1)}
+              aria-label="Next hat"
+            >
+              ›
+            </button>
           </div>
           <div className="intro">
             <h1>Hi, I'm Mehran </h1>
