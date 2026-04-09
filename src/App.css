@@ -214,7 +214,7 @@ html {
   place-items: center;
   border-radius: 999px;
   border: 2px solid rgba(0, 0, 0, 0.16);
-  background: rgba(199, 170, 112, 0.08);
+  background: rgba(255, 255, 255, 0.9);
   color: #222;
   cursor: pointer;
   font: inherit;
