@@ -195,7 +195,7 @@ html {
 
 .avatar-hat {
   position: absolute;
-  left: calc(50% + 9px);
+  left: calc(50% + 7px);
   top: -45px;
   transform: translateX(-50%);
   pointer-events: none;
